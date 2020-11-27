@@ -1,0 +1,41 @@
+<header>
+    <nav class="flex items-center py-4 px-3 justify-between shadow mb-6">
+        <ul class="flex items-center">
+            <li class="px-4 py-1 rounded shadow bg-blue-600 mx-1">
+                <a href="" class="text-white font-bold font-sans">Home</a>
+            </li>
+            <li class="px-4 py-1 rounded shadow bg-blue-600 mx-1">
+                <a href="" class="text-white font-bold font-sans">Post</a>
+            </li>
+        </ul>
+        {% if user.is_authenticated %}
+        <ul class="flex items-center">
+            <li class="px-4 py-1 rounded shadow bg-blue-600 mx-1">
+                <a href="{% url 'home' %}" class="text-white font-bold font-sans">{{ user.username }}</a>
+            </li>
+            <li class="px-4 py-1 rounded shadow bg-blue-600 mx-1">
+                <a href="{% url 'logout' %}" class="text-white font-bold font-sans">Logout</a>
+            </li>
+        </ul>
+        {% else %}
+        <ul class="flex items-center">
+            <li class="px-4 py-1 rounded shadow bg-blue-600 mx-1">
+                <a href="{% url 'login' %}" class="text-white font-bold font-sans">Sign In</a>
+            </li>
+            <li class="px-4 py-1 rounded shadow bg-blue-600 mx-1">
+                <a href="{% url 'register' %}" class="text-white font-bold font-sans">Sign Up</a>
+            </li>
+        </ul>
+        {% endif %}
+    </nav>
+    {% for message in messages %}
+    <article class="message is-{{ message.tags }}">
+        <div class="message-header">
+            <p>{{ message.tags }}</p>
+        </div>
+        <div class="message-body">
+            {{ message }}
+        </div>
+    </article>
+    {% endfor %}
+</header>
